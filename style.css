@@ -1,0 +1,205 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  font-size: 62.5%;
+
+  /*cores*/
+  --tt-heading: #0C3440;
+
+  --tt-label:#00453A;
+  --tt-input:#212529;
+  --ot-input: #02799D;
+  --bd-input: rgba(73, 80, 87, 0.3);
+  --tt-placeholder: rgba(73, 80, 87, 0.5);
+  --bg-input: #DCE2E9;
+
+  --tt-button: white;
+  --bg-button: #02799D;
+  --bg-button-hover: #01475c;
+
+  --bg-error: #F03E3E;
+  --tt-error: white;
+}
+
+body {
+  background-color: #040924;
+  font-family: 'Roboto', sans-serif;
+}
+
+body, input, button {
+  font-size: 1.6rem;
+  line-height: 2rem;
+}
+
+.container {
+  height: 100vh;
+
+  display: grid;
+  place-content: center;
+
+  padding: 1.6rem;
+}
+
+.card {
+  background: white;
+
+  padding: 4.8rem 6.4rem 6.4rem;
+
+  max-width: 42.8rem;
+
+  margin-inline: auto;
+
+  box-shadow: 0 .2rem .4rem rgba(0, 0, 0, 0.1);
+  border-radius: .6rem;
+}
+
+.title {
+  font-size: 3.2rem;
+  line-height: 4rem;
+}
+
+form {
+  width: 30rem;
+}
+
+form h1{
+  margin-bottom: 3.2rem;
+}
+
+form label {
+  font-size: 1.4rem;
+  line-height: 1.8rem;
+  color: var(--tt-label);
+  margin-bottom: .8rem;
+  display:block; /*mudando para block pois o label tem display inline que não aceita margin-bottom*/
+}
+
+form input {
+  width: 100%; /*fez a quebra de linha*/
+  border: 1px solid var(--bd-input);
+  background: var(--bg-input);
+  padding: 1.6rem;
+  border-radius: .4rem;
+}
+
+form input:focus {/*qndo o input estiver em foco, selecionado*/
+  outline: 2px solid var(--ot-input);
+}
+
+form input::placeholder{ /*subclasse placeholder para mexer no placeholder*/
+  color: var(--tt-placeholder)
+}
+
+.input-wrapper + .input-wrapper { /*aplicar no input-wrapper que anterior a ele tenha um input-wrapper*/
+  margin-top: 1.6rem;
+}
+
+form button {
+  margin-top: 3.2rem;
+  padding: 1.6rem;
+  width: 100%;
+
+  border-radius: .4rem;
+  border: none;
+
+  background-color: var(--bg-button); 
+  color: var(--tt-button);
+
+  display: flex; /*vai precisar desse display, alinhamento central das coisas*/
+  align-items: center;
+  justify-content: center;
+  gap: .8rem;
+
+  font-weight: bold;
+
+  cursor: pointer;
+
+  transition: background .3s;
+}
+
+form button:hover {
+  background: var(--bg-button-hover);
+}
+
+/*modal*/
+
+/*não há espaço nesta sintaxe pois se trata do mesmo
+elemento que possui as duas classes*/
+.modal-wrapper.open {
+  opacity:1;
+  visibility: visible;
+}
+
+.modal-wrapper {
+  position: absolute;
+  /*pois quero que crie uma nova camada e fique por cima*/
+  top: 0; /*canto superior esquerdo, pra depois esticar pela tela*/
+  bottom: 0; /*estica o sombreado para baixo e...*/
+  right: 0; /*estica o sombreado para direita,*/
+  left: 0; /*estica o sombreado de volta para esquerda.*/
+
+  /*inset: 0; /*substitui todos os comando acima top->left*/
+  
+  background: rgba(0, 0, 0, 0.7);
+
+  display: grid;
+  /*estratégia de alinhar ao meio quando tem só um elemento na caixa*/
+  /*estica o elemento para ocupar toda a caixa*/
+
+  place-content: center;
+  /*para manter as mesmas propriedades que tinha antes*/
+
+  opacity: 0; /*esta classe não aparece por padrão*/
+  visibility: hidden; /*esta classe não aparece por padrão*/
+} 
+
+.modal {
+  position: relative; /*para ajudar a posicionar o close do popup*/
+}
+
+.modal button {
+  background: none;
+  border: none;
+
+  position: absolute; /*para posicionar o X, vai precisar do pai ser position relative*/
+  /*top: 0; Assim jogo pra cima*/
+  /*right: 0; Assim jogo pra direita*/
+  top: 1.6rem; /*mas como há padding, respeito o espaço do layout*/
+  right: 1.6rem; /*mas como há padding, respeito o espaço do layout*/
+  cursor: pointer;
+  transition: transform .3s;
+}
+
+.modal button:hover {
+  transform: scale(1.1); /*para p X aumentar de tamanho com o mouse em cima*/
+}
+
+/*alert error*/
+.alert-error.open {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.alert-error {
+  position: absolute;
+  background-color: var(--bg-error);
+  top: 0;
+  left: 0;
+  right: 0;
+  text-align: center;
+  color: var(--tt-error);
+  padding: .8rem 0;
+  font-weight: bold;
+
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-30px);
+  transition: transform .5s;
+}
+
+/* link Figma: https://www.figma.com/file/qMSiIwqHjJgqmfAaRTOewY/IMC-(Copy)?node-id=6%3A4 */
